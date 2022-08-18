@@ -1,11 +1,7 @@
 /*
  * @Author: Yimning 1148967988@qq.com
  * @Date: 2022-08-15 04:56:40
- * @LastEditors: Yimning 1148967988@qq.com
- * @LastEditTime: 2022-08-18 02:30:49
- * @FilePath: /www/demo_test_main/test_main.c
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -29,7 +25,7 @@ int main()
     char *pstr = NULL;
     char *pstr1 = NULL;
     // char *query_string = getenv("QUERY_STRING");
-    char *query_string = "CMD=LOGON&SELECT=0&USERNAME=9999999999999999&PASSWORD=0";
+    char *query_string = "CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=123";
     fprintf(stdout, "<HTML>\n");
     fprintf(stdout, "<HEAD>\n");
     fprintf(stdout, "<TITLE>CGI解析GET数据</TITLE>\n");
