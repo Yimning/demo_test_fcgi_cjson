@@ -120,7 +120,6 @@ int sln_cgi_content_parse(char *query_string, int len)
     start = (char *)query_string;
 
 /*  eg.    CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=root */
-    printf("==================%d\n", len);
 
     while ((end = strchr(start, '=')))
     {
@@ -145,8 +144,7 @@ int sln_cgi_content_parse(char *query_string, int len)
         {
             break;
         }
-        fprintf(stdout, "<P>NAME: %s, VALUE: %s</P>\n", attr, value);
-
+        //fprintf(stdout, "<P>NAME: %s, VALUE: %s</P>\n", attr, value);
     }
     return 0;
 }
@@ -164,12 +162,10 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     cJSON *root = cJSON_CreateObject();
 
 /*  eg.    CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=root */
-    printf("==================%d\n", len);
 
     while ((end = strchr(start, '=')))
     {
         attr_len = end - start;
-        printf("%d\r\n", attr_len);
 
         sln_string_unescape(&attr, start, attr_len);   // get and return the string before"="
 
@@ -189,15 +185,14 @@ char* cjson_cgi_content_parse(char *query_string, int len)
         {
             break;
         }
-        fprintf(stdout, "<P>NAME: %s, VALUE: %s</P>\n", attr, value);
+        //fprintf(stdout, "<P>NAME: %s, VALUE: %s</P>\n", attr, value);
         // 加入节点（键值对），节点名称为value，节点值为
         //cJSON_AddNumberToObject(root, attr, value);
         cJSON_AddStringToObject(root, attr, value);
         // 打印JSON数据包
         pstr = cJSON_Print(root);
-        printf("%s\n", pstr);
-
     }
+     printf("%s\n", pstr);
     // 释放内存
     cJSON_Delete(root);
     //free(pstr);
