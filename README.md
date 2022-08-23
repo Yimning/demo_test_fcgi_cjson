@@ -6,7 +6,7 @@ This is a demo for testing fcgi and cjson project.
 也可以使用rudecgi(c++).
 
 # Dependent installation 相关依赖安装
-（略）
+（略）   
 
 # You know
 fcgi处理步骤<br>
