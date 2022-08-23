@@ -8,7 +8,7 @@ This is a demo for testing fcgi and cjson project.
 # Dependent installation 相关依赖安装
 （略）
 
-# you know
+# You know
 fcgi处理步骤<br>
 通过Internet 把用户请求送到Web 服务器<br>
 Web 服务器接收到用户请求并交给CGI 程序<br>
