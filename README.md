@@ -24,7 +24,7 @@ eg.<br>
 2---USERNAME=user
 3---PASSWORD=123
 ```
-
+   
 对其解析成json字符串
 ```json
 {
