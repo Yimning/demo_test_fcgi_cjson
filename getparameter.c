@@ -57,10 +57,10 @@ char* getparameter(char *query_string, int idx)
     }else{
         sprintf(pstr, "数组索引值异常!最小索引为1,最大索引值为%d",i);
     }
-    fprintf(stdout, "get[%d] = %s\n",idx,pstr);
+    //fprintf(stdout, "get[%d] = %s\n",idx,pstr);
     for (int m = 0; m < i; m++)
     {
-        printf("%d---%s\n",m, get[m]);    //打印全部解析结果
+        //printf("%d---%s\n",m, get[m]);    //打印全部解析结果
         free(get[m]);
     }
     return pstr;    //注意在主函数调用完之后要释放内存,如free(p);
@@ -192,7 +192,6 @@ char* cjson_cgi_content_parse(char *query_string, int len)
         // 打印JSON数据包
         pstr = cJSON_Print(root);
     }
-     printf("%s\n", pstr);
     // 释放内存
     cJSON_Delete(root);
     //free(pstr);
