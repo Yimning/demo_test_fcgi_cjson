@@ -196,7 +196,7 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     // 释放内存
     cJSON_Delete(root);
     //free(pstr);
-    return pstr;
+    return pstr; 
 }
 
 
