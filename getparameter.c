@@ -192,6 +192,7 @@ char* cjson_cgi_content_parse(char *query_string, int len)
         // 打印JSON数据包
         pstr = cJSON_Print(root);
     }
+    printf("%s\n", pstr);
     // 释放内存
     cJSON_Delete(root);
     //free(pstr);
