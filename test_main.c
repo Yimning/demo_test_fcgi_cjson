@@ -72,6 +72,7 @@ int main()
     if (!json)
     {
         printf("Error before: [%s]\n", cJSON_GetErrorPtr());
+        
     }
     else
     {
@@ -93,7 +94,15 @@ int main()
         cJSON_Delete(json);
     }
 
-    cjson_cgi_getvalue(text, "123");
+    char *pchar = NULL;
+    int a = 0;
+
+   pchar = (char *) cjson_cgi_getvalue(text, "timestamp");
+    printf("value:%s\r\n", pchar);
+
+    a = (int *) cjson_cgi_getvalue(text, "value");
+    printf("value:%d\r\n", a);
+
     
     return 0;
 }

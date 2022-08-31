@@ -149,6 +149,13 @@ int sln_cgi_content_parse(char *query_string, int len)
     return 0;
 }
 
+/* 
+    每个程序都包含一或多个进程运行，而每个进程都有自己的进程堆。
+    虽然程序中动态申请的空间如果没有手动释放，在程序运行结束，也就是所有进程消亡后，
+    系统也会将进程中申请的所有的内存资源全部释放。但是如果一旦程序运行时间过程，或者程序占用内存过大，
+    进程就会耗尽系统所有内存，最终造成内存泄漏。
+    所以避免程序出现内存泄漏的最好办法是，当使用动态空间完毕后，我们应该人为释放内存空间。
+*/
 
 char* cjson_cgi_content_parse(char *query_string, int len)
 {
@@ -199,24 +206,22 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     return pstr; 
 }
 
-char* cjson_cgi_getvalue(char *query_string, const char *const key){
+void* cjson_cgi_getvalue(char *query_string, const char *const key){
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
+
     // 解析数据包
     json = cJSON_Parse(query_string);
 
     if (!json)
     {
-
-        sprintf(json_value->valuestring,"Error before: [%s]\n", cJSON_GetErrorPtr());
-        //printf("====%s\r\n", json_value->valuestring);
-        return json_value->valuestring;
+        //sprintf(pstr,"Error : [%s]\n", cJSON_GetErrorPtr());
+        return (void *)cJSON_GetErrorPtr();
     }
     else
     {
-        // 解析开关值
+        // 解析值---string
         json_value = cJSON_GetObjectItem(json, key); 
-
         if ((json_value != NULL)&&(json_value->type == cJSON_String))
         {
             // valuestring中获得结果
@@ -224,9 +229,19 @@ char* cjson_cgi_getvalue(char *query_string, const char *const key){
         }else
         {
             return NULL;
-        }  
-        // 释放内存空间
+        } 
+
         
+        json_value = cJSON_GetObjectItem(json, key); 
+        if ((json_value != NULL)&&(json_value->type == cJSON_String))
+        {
+            // valuestring中获得结果
+            return json_value->valuestring;
+        }else
+        {
+            return NULL;
+        }   
+        // 释放内存空间
         cJSON_Delete(json);
     }
 
