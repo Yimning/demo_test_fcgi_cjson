@@ -32,6 +32,8 @@ int sln_string_unescape(char **attr, const char *src, int len);
 int sln_cgi_content_parse(char *input_content, int len);
 char* cjson_cgi_content_parse(char *query_string, int len);
 
+char* cjson_cgi_getvalue(char *query_string, const char *const key);
+
 unsigned char CharToHex(unsigned char bHex);
 unsigned char HexToChar(unsigned char bChar);
 

@@ -199,6 +199,40 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     return pstr; 
 }
 
+char* cjson_cgi_getvalue(char *query_string, const char *const key){
+    /* 解析JSON数据包 */
+    cJSON *json, *json_value;
+    // 解析数据包
+    json = cJSON_Parse(query_string);
+
+    if (!json)
+    {
+
+        sprintf(json_value->valuestring,"Error before: [%s]\n", cJSON_GetErrorPtr());
+        //printf("====%s\r\n", json_value->valuestring);
+        return json_value->valuestring;
+    }
+    else
+    {
+        // 解析开关值
+        json_value = cJSON_GetObjectItem(json, key); 
+
+        if ((json_value != NULL)&&(json_value->type == cJSON_String))
+        {
+            // valuestring中获得结果
+            return json_value->valuestring;
+        }else
+        {
+            return NULL;
+        }  
+        // 释放内存空间
+        
+        cJSON_Delete(json);
+    }
+
+    return NULL;
+}
+
 
 #if 0
 
