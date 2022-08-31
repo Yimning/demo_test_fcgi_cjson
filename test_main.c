@@ -62,6 +62,7 @@ int main()
     printf("%s\n", out);
     // 释放内存
     cJSON_Delete(root);
+    
     free(out);
 
     /* 解析JSON数据包 */
@@ -91,6 +92,8 @@ int main()
         // 释放内存空间
         cJSON_Delete(json);
     }
+
+    cjson_cgi_getvalue(text, "123");
     
     return 0;
 }
