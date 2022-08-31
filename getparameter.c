@@ -206,17 +206,19 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     return pstr; 
 }
 
-void* cjson_cgi_getvalue(char *query_string, const char *const key){
+void* cjson_cgi_getStrValue(char *query_string, const char *const key){
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
+    char *pstr; 
+    pstr = (char *)malloc(strlen(query_string)+1);
+    memset(pstr,0,strlen(query_string)+1);
 
     // 解析数据包
     json = cJSON_Parse(query_string);
 
     if (!json)
     {
-        //sprintf(pstr,"Error : [%s]\n", cJSON_GetErrorPtr());
-        return (void *)cJSON_GetErrorPtr();
+        sprintf(pstr,"%s", cJSON_GetErrorPtr());
     }
     else
     {
@@ -224,30 +226,65 @@ void* cjson_cgi_getvalue(char *query_string, const char *const key){
         json_value = cJSON_GetObjectItem(json, key); 
         if ((json_value != NULL)&&(json_value->type == cJSON_String))
         {
-            // valuestring中获得结果
-            return json_value->valuestring;
-        }else
+            //valuestring中获得结果
+            //return json_value->valuestring;
+            sprintf(pstr,"%s", json_value->valuestring);
+        }
+
+        if ((json_value != NULL)&&(json_value->type == cJSON_Number)) // 解析值---int/double
         {
-            return NULL;
+            sprintf(pstr,"%lf", json_value->valuedouble);
         } 
 
-        
-        json_value = cJSON_GetObjectItem(json, key); 
-        if ((json_value != NULL)&&(json_value->type == cJSON_String))
-        {
-            // valuestring中获得结果
-            return json_value->valuestring;
-        }else
-        {
-            return NULL;
-        }   
         // 释放内存空间
         cJSON_Delete(json);
     }
-
-    return NULL;
+    return pstr;
 }
 
+
+
+int cjson_cgi_getIntValue(char *query_string, const char *const key){
+    /* 解析JSON数据包 */
+    cJSON *json, *json_value;
+    int ret = 0;
+    // 解析数据包
+    json = cJSON_Parse(query_string);
+
+    if (!json)
+    {
+        json_value = cJSON_GetObjectItem(json, key); 
+        if ((json_value != NULL)&&(json_value->type == cJSON_Number)) // 解析值---int
+        {
+            ret = json_value->valueint;
+        } 
+
+        // 释放内存空间
+        cJSON_Delete(json);
+    }
+    return ret;
+}
+
+double cjson_cgi_getDoubleValue(char *query_string, const char *const key){
+    /* 解析JSON数据包 */
+    cJSON *json, *json_value;
+    double ret = -1;
+    // 解析数据包
+    json = cJSON_Parse(query_string);
+    if (json)
+    {
+
+        json_value = cJSON_GetObjectItem(json, key); 
+        if ((json_value != NULL)&&(json_value->type == cJSON_Number)) // 解析值---double
+        {
+            ret = json_value->valuedouble;
+        } 
+
+        // 释放内存空间
+        cJSON_Delete(json);
+    }
+    return ret;
+}
 
 #if 0
 
