@@ -206,14 +206,14 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     return pstr; 
 }
 
-void* cjson_cgi_getStrValue(char *query_string, const char *const key){
+void* cjson_cgi_getStrValue(char *query_string, const char *const key)
+{
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     char *pstr; 
     pstr = (char *)malloc(strlen(query_string)+1);
     memset(pstr,0,strlen(query_string)+1);
 
-    // 解析数据包
     json = cJSON_Parse(query_string);
 
     if (!json)
@@ -243,14 +243,15 @@ void* cjson_cgi_getStrValue(char *query_string, const char *const key){
 }
 
 
-int cjson_cgi_getIntValue(char *query_string, const char *const key){
+int cjson_cgi_getIntValue(char *query_string, const char *const key)
+{
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     int ret = -1;
-    // 解析数据包
+
     json = cJSON_Parse(query_string);
 
-    if (!json)
+    if (json)
     {
         json_value = cJSON_GetObjectItem(json, key); 
         if ((json_value != NULL)&&(json_value->type == cJSON_Number)) // 解析值---int
@@ -264,15 +265,14 @@ int cjson_cgi_getIntValue(char *query_string, const char *const key){
     return ret;
 }
 
-double cjson_cgi_getDoubleValue(char *query_string, const char *const key){
+double cjson_cgi_getDoubleValue(char *query_string, const char *const key)
+{
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     double ret = -1;
-    // 解析数据包
     json = cJSON_Parse(query_string);
     if (json)
     {
-
         json_value = cJSON_GetObjectItem(json, key); 
         if ((json_value != NULL)&&(json_value->type == cJSON_Number)) // 解析值---double
         {
@@ -284,6 +284,32 @@ double cjson_cgi_getDoubleValue(char *query_string, const char *const key){
     }
     return ret;
 }
+
+bool cjson_cgi_getBoolValue(char *query_string, const char *const key)
+{
+    /* 解析JSON数据包 */
+    cJSON *json, *json_value;
+    bool ret;
+
+    json = cJSON_Parse(query_string);
+    if (json)
+    {
+        json_value = cJSON_GetObjectItem(json, key); 
+        if ((json_value != NULL)&&(json_value->type == cJSON_False)) // 解析值---bool---false
+        {
+            ret = false;
+        }
+        if ((json_value != NULL)&&(json_value->type == cJSON_True)) // 解析值---double---true
+        {
+            ret = true;
+        } 
+
+        // 释放内存空间
+        cJSON_Delete(json);
+    }
+    return ret;
+}
+
 
 #if 0
 

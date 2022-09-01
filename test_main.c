@@ -12,7 +12,7 @@
 #include "getparameter.h"
 
 // 被解析的JSON数据包
-char text[] = "{\"timestamp\":\"2021-11-19T08:50:11\",\"value\":321,\"valf\":321.0998}";
+char text[] = "{\"timestamp\":\"2021-11-19T08:50:11\",\"value\":321,\"valf\":321.0998,\"bool\":true}";
 
 int main()
 {
@@ -97,6 +97,7 @@ int main()
     char *pchar = NULL;
     double f = 0;
     int a = 0;
+    bool bl = 0;
 
     pchar = (char *) cjson_cgi_getStrValue(text, "timestamp");
     printf("value:%s\r\n", pchar);
@@ -105,10 +106,14 @@ int main()
     printf("value:%s\r\n", pchar);
 
     f = cjson_cgi_getDoubleValue(text, "valf");
-printf("cjson_cgi_getDoubleValue:%lf\r\n", f);
+    printf("cjson_cgi_getDoubleValue:%lf\r\n", f);
 
     a = cjson_cgi_getIntValue(text, "value");
-printf("cjson_cgi_getIntValue:%d\r\n", a);
+    printf("cjson_cgi_getIntValue:%d\r\n", a);
     
+
+    bl = cjson_cgi_getBoolValue(text, "bool");
+    printf("cjson_cgi_getBoolValue:%d\r\n", bl);
+
     return 0;
 }
