@@ -30,10 +30,11 @@ arrT* getOneChar(char *query_string);
 char* getparameter(char *query_string, int index);
  //返回二维数组的地址，必须制定它的一维的长度
 int sln_string_unescape(char **attr, const char *src, int len);
-int sln_cgi_content_parse(char *input_content, int len);
-char* cjson_cgi_content_parse(char *query_string, int len);
+int sln_cgi_content_parse(char *input_content);
 
-void* cjson_cgi_getStrValue(char *query_string, const char *const key);
+char* cjson_cgi_content_parse(char *query_string);
+
+char* cjson_cgi_getStrValue(char *query_string, const char *const key);
 
 int cjson_cgi_getIntValue(char *query_string, const char *const key);
 

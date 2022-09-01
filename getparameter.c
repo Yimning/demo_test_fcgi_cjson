@@ -111,13 +111,17 @@ int sln_string_unescape(char **attr, const char *src, int len)
 /*
 usage :  sln_cgi_content_parse(query_string, strlen(query_string));
 */
-int sln_cgi_content_parse(char *query_string, int len)
+int sln_cgi_content_parse(char *query_string)
 {
     char *start = NULL, *end = NULL;
     char *attr = NULL, *value = NULL;
     int attr_len, value_len;
     int ret = 0;
     start = (char *)query_string;
+    
+    if(query_string == NULL)  return NULL;
+
+    int len = strlen(query_string);
 
 /*  eg.    CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=root */
 
@@ -157,15 +161,19 @@ int sln_cgi_content_parse(char *query_string, int len)
     所以避免程序出现内存泄漏的最好办法是，当使用动态空间完毕后，我们应该人为释放内存空间。
 */
 
-char* cjson_cgi_content_parse(char *query_string, int len)
+char* cjson_cgi_content_parse(char *query_string)
 {
     char *start = NULL, *end = NULL;
     char *attr = NULL, *value = NULL;
     int attr_len, value_len;
     start = (char *)query_string;
     char *pstr= NULL;
-
-        // 创建JSON Object
+    if(query_string == NULL){
+        return NULL;
+    }
+    int len = strlen(query_string);
+printf("=============%s\n", query_string);
+    // 创建JSON Object
     cJSON *root = cJSON_CreateObject();
 
 /*  eg.    CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=root */
@@ -206,7 +214,7 @@ char* cjson_cgi_content_parse(char *query_string, int len)
     return pstr; 
 }
 
-void* cjson_cgi_getStrValue(char *query_string, const char *const key)
+char* cjson_cgi_getStrValue(char *query_string, const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;

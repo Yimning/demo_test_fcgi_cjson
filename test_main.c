@@ -33,7 +33,7 @@ int main()
     fprintf(stdout, "<BODY>\n");
     fprintf(stdout, "<H3>以下为解析后数据</H3>\n");
 
-    sln_cgi_content_parse(query_string, strlen(query_string));
+    sln_cgi_content_parse(query_string);
     fprintf(stdout, "Content-Type:text/html;charset=utf-8<br/>");
     fprintf(stdout, "本网页由CGI自动生成!\n");
     fprintf(stdout, "</BODY>");
@@ -49,7 +49,8 @@ int main()
     fprintf(stdout, "getOneChar[0] = %c\n", *(pstr1 + 1));
 
 
-    cjson_cgi_content_parse(query_string, strlen(query_string));
+    pstr = cjson_cgi_content_parse(query_string);
+    fprintf(stdout, "cjson_cgi_content_parse = %s\n", pstr);
 #endif
     /* 组装JSON数据包 */
 
