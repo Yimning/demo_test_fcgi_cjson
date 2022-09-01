@@ -172,7 +172,7 @@ char* cjson_cgi_content_parse(char *query_string)
         return NULL;
     }
     int len = strlen(query_string);
-printf("=============%s\n", query_string);
+
     // 创建JSON Object
     cJSON *root = cJSON_CreateObject();
 
@@ -207,22 +207,23 @@ printf("=============%s\n", query_string);
         // 打印JSON数据包
         pstr = cJSON_Print(root);
     }
-    printf("%s\n", pstr);
+    //printf("%s\n", pstr);
     // 释放内存
     cJSON_Delete(root);
     //free(pstr);
     return pstr; 
 }
 
-char* cjson_cgi_getStrValue(char *query_string, const char *const key)
+char* cjson_cgi_getStrValue(char *jsonString, const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     char *pstr; 
-    pstr = (char *)malloc(strlen(query_string)+1);
-    memset(pstr,0,strlen(query_string)+1);
+    if(!jsonString) return NULL;
+    pstr = (char *)malloc(strlen(jsonString)+1);
+    memset(pstr,0,strlen(jsonString)+1);
 
-    json = cJSON_Parse(query_string);
+    json = cJSON_Parse(jsonString);
 
     if (!json)
     {
@@ -251,13 +252,13 @@ char* cjson_cgi_getStrValue(char *query_string, const char *const key)
 }
 
 
-int cjson_cgi_getIntValue(char *query_string, const char *const key)
+int cjson_cgi_getIntValue(char *jsonString, const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     int ret = -1;
-
-    json = cJSON_Parse(query_string);
+    if(!jsonString) return NULL;
+    json = cJSON_Parse(jsonString);
 
     if (json)
     {
@@ -273,12 +274,13 @@ int cjson_cgi_getIntValue(char *query_string, const char *const key)
     return ret;
 }
 
-double cjson_cgi_getDoubleValue(char *query_string, const char *const key)
+double cjson_cgi_getDoubleValue(char *jsonString, const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     double ret = -1;
-    json = cJSON_Parse(query_string);
+    if(!jsonString) return ret;
+    json = cJSON_Parse(jsonString);
     if (json)
     {
         json_value = cJSON_GetObjectItem(json, key); 
@@ -293,13 +295,13 @@ double cjson_cgi_getDoubleValue(char *query_string, const char *const key)
     return ret;
 }
 
-bool cjson_cgi_getBoolValue(char *query_string, const char *const key)
+bool cjson_cgi_getBoolValue(char *jsonString, const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     bool ret;
-
-    json = cJSON_Parse(query_string);
+    if(!jsonString) return NULL;
+    json = cJSON_Parse(jsonString);
     if (json)
     {
         json_value = cJSON_GetObjectItem(json, key); 

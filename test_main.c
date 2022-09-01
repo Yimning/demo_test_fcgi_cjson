@@ -48,9 +48,9 @@ int main()
     pstr1 = getOneChar(query_string);
     fprintf(stdout, "getOneChar[0] = %c\n", *(pstr1 + 1));
 
-
     pstr = cjson_cgi_content_parse(query_string);
     fprintf(stdout, "cjson_cgi_content_parse = %s\n", pstr);
+
 #endif
     /* 组装JSON数据包 */
 
@@ -101,10 +101,11 @@ int main()
     bool bl = 0;
 
     pchar = (char *) cjson_cgi_getStrValue(text, "timestamp");
-    printf("value:%s\r\n", pchar);
+    printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
     pchar = (char *) cjson_cgi_getStrValue(text, "value");
-    printf("value:%s\r\n", pchar);
+    printf("cjson_cgi_getStrValue:%s\r\n", pchar);
+
 
     f = cjson_cgi_getDoubleValue(text, "valf");
     printf("cjson_cgi_getDoubleValue:%lf\r\n", f);
