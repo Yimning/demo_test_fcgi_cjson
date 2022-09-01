@@ -34,7 +34,7 @@ int sln_cgi_content_parse(char *input_content);
 
 char* cjson_cgi_content_parse(char *query_string);
 
-char* cjson_cgi_getStrValue(char *query_string, const char *const key);
+char* cjson_cgi_getStrValue(const char *const key);
 
 int cjson_cgi_getIntValue(char *query_string, const char *const key);
 

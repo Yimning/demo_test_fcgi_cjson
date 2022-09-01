@@ -214,11 +214,13 @@ char* cjson_cgi_content_parse(char *query_string)
     return pstr; 
 }
 
-char* cjson_cgi_getStrValue(char *jsonString, const char *const key)
+char* cjson_cgi_getStrValue(const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     char *pstr; 
+    char *query_string = getenv("QUERY_STRING");
+    char *jsonString = cjson_cgi_content_parse(query_string);
     if(!jsonString) return NULL;
     pstr = (char *)malloc(strlen(jsonString)+1);
     memset(pstr,0,strlen(jsonString)+1);
