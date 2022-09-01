@@ -36,9 +36,7 @@ void* cjson_cgi_getStrValue(char *query_string, const char *const key);
 
 int cjson_cgi_getIntValue(char *query_string, const char *const key);
 
-
 double cjson_cgi_getDoubleValue(char *query_string, const char *const key);
-
 
 unsigned char CharToHex(unsigned char bHex);
 unsigned char HexToChar(unsigned char bChar);

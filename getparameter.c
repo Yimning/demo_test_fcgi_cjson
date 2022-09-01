@@ -243,11 +243,10 @@ void* cjson_cgi_getStrValue(char *query_string, const char *const key){
 }
 
 
-
 int cjson_cgi_getIntValue(char *query_string, const char *const key){
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
-    int ret = 0;
+    int ret = -1;
     // 解析数据包
     json = cJSON_Parse(query_string);
 
