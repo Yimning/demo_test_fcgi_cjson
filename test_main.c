@@ -100,21 +100,21 @@ int main()
     int a = 0;
     bool bl = 0;
 
-    pchar = (char *) cjson_cgi_getStrValue(text, "timestamp");
+    pchar = (char *) cjson_cgi_getStrValue("timestamp");
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
-    pchar = (char *) cjson_cgi_getStrValue(text, "value");
+    pchar = (char *) cjson_cgi_getStrValue("value");
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
 
-    f = cjson_cgi_getDoubleValue(text, "valf");
+    f = cjson_cgi_getDoubleValue("valf");
     printf("cjson_cgi_getDoubleValue:%lf\r\n", f);
 
-    a = cjson_cgi_getIntValue(text, "value");
+    a = cjson_cgi_getIntValue("value");
     printf("cjson_cgi_getIntValue:%d\r\n", a);
     
 
-    bl = cjson_cgi_getBoolValue(text, "bool");
+    bl = cjson_cgi_getBoolValue("bool");
     printf("cjson_cgi_getBoolValue:%d\r\n", bl);
 
     return 0;

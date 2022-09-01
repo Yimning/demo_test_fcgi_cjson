@@ -254,12 +254,15 @@ char* cjson_cgi_getStrValue(const char *const key)
 }
 
 
-int cjson_cgi_getIntValue(char *jsonString, const char *const key)
+int cjson_cgi_getIntValue(const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     int ret = -1;
+    char *query_string = getenv("QUERY_STRING");
+    char *jsonString = cjson_cgi_content_parse(query_string);
     if(!jsonString) return NULL;
+
     json = cJSON_Parse(jsonString);
 
     if (json)
@@ -276,12 +279,16 @@ int cjson_cgi_getIntValue(char *jsonString, const char *const key)
     return ret;
 }
 
-double cjson_cgi_getDoubleValue(char *jsonString, const char *const key)
+double cjson_cgi_getDoubleValue(const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     double ret = -1;
+    char *query_string = getenv("QUERY_STRING");
+    char *jsonString = cjson_cgi_content_parse(query_string);
+    
     if(!jsonString) return ret;
+
     json = cJSON_Parse(jsonString);
     if (json)
     {
@@ -297,12 +304,15 @@ double cjson_cgi_getDoubleValue(char *jsonString, const char *const key)
     return ret;
 }
 
-bool cjson_cgi_getBoolValue(char *jsonString, const char *const key)
+bool cjson_cgi_getBoolValue(const char *const key)
 {
     /* 解析JSON数据包 */
     cJSON *json, *json_value;
     bool ret;
+    char *query_string = getenv("QUERY_STRING");
+    char *jsonString = cjson_cgi_content_parse(query_string);
     if(!jsonString) return NULL;
+
     json = cJSON_Parse(jsonString);
     if (json)
     {

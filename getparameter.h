@@ -36,11 +36,11 @@ char* cjson_cgi_content_parse(char *query_string);
 
 char* cjson_cgi_getStrValue(const char *const key);
 
-int cjson_cgi_getIntValue(char *query_string, const char *const key);
+int cjson_cgi_getIntValue(const char *const key);
 
-double cjson_cgi_getDoubleValue(char *query_string, const char *const key);
+double cjson_cgi_getDoubleValue(const char *const key);
 
-bool cjson_cgi_getBoolValue(char *query_string, const char *const key);
+bool cjson_cgi_getBoolValue(const char *const key);
 
 unsigned char CharToHex(unsigned char bHex);
 unsigned char HexToChar(unsigned char bChar);
