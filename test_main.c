@@ -74,7 +74,7 @@ int main()
     {
         printf("Error before: [%s]\n", cJSON_GetErrorPtr());
         
-    }
+    }  
     else
     {
         // 解析开关值
@@ -94,7 +94,7 @@ int main()
         // 释放内存空间
         cJSON_Delete(json);
     }
-
+ 
     char *pchar = NULL;
     double f = 0;
     int a = 0;
@@ -103,7 +103,7 @@ int main()
     pchar = (char *) cjson_cgi_getStrValue("timestamp");
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
-    pchar = (char *) cjson_cgi_getStrValue("value");
+    pchar = (char *) cjson_cgi_getStrValue("value");  
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
 
