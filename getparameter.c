@@ -11,7 +11,7 @@ arrT* getOneChar(char *query_string)
 {
     /*  eg.    CMD=LOGON&SELECT=0&USERNAME=user&PASSWORD=root */
     char *pstr= (char *)malloc(strlen(query_string) + 1);
-    int len = strlen(query_string);
+    int len = strlen(query_string); 
     char *p = query_string;
     for (int m = 0; m < len; m++)
     {
@@ -286,7 +286,7 @@ double cjson_cgi_getDoubleValue(const char *const key)
     double ret = -1;
     char *query_string = getenv("QUERY_STRING");
     char *jsonString = cjson_cgi_content_parse(query_string);
-    
+
     if(!jsonString) return ret;
 
     json = cJSON_Parse(jsonString);
