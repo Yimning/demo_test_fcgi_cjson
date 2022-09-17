@@ -34,13 +34,28 @@ int sln_cgi_content_parse(char *input_content);
 
 char* cjson_cgi_content_parse(char *query_string);
 
-char* cjson_cgi_getStrValue(const char *const key);
+/* cJSON */
+char* cJSON_GetStrValue(char *jsonString, const char *const key);
+int cJSON_GetIntValue(char *jsonString, const char *const key);
+double cJSON_GetDoubleValue(char *jsonString, const char *const key);
+bool cJSON_GetBoolValue(char *jsonString, const char *const key);
 
-int cjson_cgi_getIntValue(const char *const key);
 
-double cjson_cgi_getDoubleValue(const char *const key);
+//GET method
+char* cjson_cgi_GET_content_parse(char *query_string);
+char* cjson_cgi_GET_getStrValue(const char *const key);
+int cjson_cgi_GET_getIntValue(const char *const key);
+double cjson_cgi_GET_getDoubleValue(const char *const key);
+bool cjson_cgi_GET_getBoolValue(const char *const key);
 
-bool cjson_cgi_getBoolValue(const char *const key);
+
+//POST method
+
+char* cjson_cgi_POST_getStrValue(char *parm_string,const char *const key);
+int cjson_cgi_POST_getIntValue(char *parm_string,const char *const key);
+double cjson_POST_GET_getDoubleValue(char *parm_string,const char *const key);
+bool cjson_cgi_POST_getBoolValue(char *parm_string,const char *const key);
+
 
 unsigned char CharToHex(unsigned char bHex);
 unsigned char HexToChar(unsigned char bChar);

@@ -9,6 +9,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <sys/stat.h>
+
 #include "getparameter.h"
 
 // 被解析的JSON数据包
@@ -48,8 +49,11 @@ int main()
     pstr1 = getOneChar(query_string);
     fprintf(stdout, "getOneChar[0] = %c\n", *(pstr1 + 1));
 
-    pstr = cjson_cgi_content_parse(query_string);
-    fprintf(stdout, "cjson_cgi_content_parse = %s\n", pstr);
+    char *str =NULL;
+    str = cjson_cgi_content_parse(query_string);
+
+    printf("------------------------ = %s\n", str);
+
 
 #endif
     /* 组装JSON数据包 */
@@ -100,22 +104,32 @@ int main()
     int a = 0;
     bool bl = 0;
 
-    pchar = (char *) cjson_cgi_getStrValue("timestamp");
+    pchar = (char *) cjson_cgi_GET_getStrValue("timestamp");
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
-    pchar = (char *) cjson_cgi_getStrValue("value");  
+    pchar = (char *) cjson_cgi_GET_getStrValue("value");  
     printf("cjson_cgi_getStrValue:%s\r\n", pchar);
 
 
-    f = cjson_cgi_getDoubleValue("valf");
+    f = cjson_cgi_GET_getDoubleValue("valf");
     printf("cjson_cgi_getDoubleValue:%lf\r\n", f);
 
-    a = cjson_cgi_getIntValue("value");
+    a = cjson_cgi_GET_getIntValue("value");
     printf("cjson_cgi_getIntValue:%d\r\n", a);
     
 
-    bl = cjson_cgi_getBoolValue("bool");
+    bl = cjson_cgi_GET_getBoolValue("bool");
     printf("cjson_cgi_getBoolValue:%d\r\n", bl);
+
+    char *jsonstr = "{\"username\":\"admin\",\"password\":0,\"float\":123.056,\"bool\":true}";
+
+    printf("cJSON_GetStringValue=%s\r\n",cJSON_GetStrValue(jsonstr,"username"));
+    printf("cJSON_GetIntValue=%d\r\n",cJSON_GetIntValue(jsonstr,"password"));
+
+    printf("cJSON_GetDoubleValue=%f\r\n",cJSON_GetDoubleValue(jsonstr,"float"));
+
+    printf("cJSON_GetBoolValue=%d\r\n",cJSON_GetBoolValue(jsonstr,"bool")); 
+    
 
     return 0;
 }
